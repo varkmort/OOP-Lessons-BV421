@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <string>
+#include <vector>
 
 #include "Date.hpp"
 
@@ -9,7 +10,7 @@ public:
 
     Integer(bool sign, unsigned units):sign_(sign),units_(units) {}
     
-    Integer(int num) {                                     
+    explicit Integer(int num) {                                     
         if (0 >= num) {                                                       
             sign_ = true;
             units_ = -1 * num;
@@ -66,6 +67,7 @@ public:
         this->units_ = newUnits;
     }
 
+    friend void DoSomething(const Integer &a);
 
 
 private:
@@ -81,7 +83,16 @@ private:
 // 
 // 1) нельзя нарушать "контракт" оператора
 // 2) нельзя изменять поведение оператора
-//
+// 
+// *) не стоит перегружать опреаторы которые можно неправильно воспринять 
+//    при работе с классом
+// 
+// -------------------
+//  Лучше реализовывать операторы как дружественные функции если есть риск проблем
+//      проблема может возникать при наследовании
+//      когда класс - наследник сохраняет функционал но в делалях используется
+//      не для тех целей что и родитель
+//  
 
 
 
@@ -111,10 +122,15 @@ int main()
     Integer a{ 4 };
     Integer b{ -6 };
     auto c = a + b;
-    c = a.operator+(6);
-    c = 4 + b;//не может так как нет у int метода для сложения
+    c = a.operator+(Integer(6));
+    //c = 4 + b;//не может так как нет у int метода для сложения
     c = a - b;
-    c = a - 5;
-    c = operator-(4, b);
+    c = a - Integer(5);
+    c = operator-(Integer(4), b);
+    //при explicit конструкторе у класса становится невозможен его 
+    //вызов компилятором в автоматическом режиме
+
+    //DoSomething(a);
+    //DoSomething(current);
 
 }
