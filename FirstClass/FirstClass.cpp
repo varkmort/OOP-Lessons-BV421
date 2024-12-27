@@ -2,7 +2,32 @@
 #include <string>
 #include <vector>
 
+#include <ctime>
+
 #include "Date.hpp"
+#include "Time.hpp"
+
+
+void F00(const Date &obj) {
+    obj.GetData();
+    //можно вызвать те методы что мы пометели как const
+}
+
+void Example() {
+    time_t time_var = time(NULL);
+
+
+    Time a;
+    Time b{ 1,1,1,1 };
+    Time c{ 1,1,1 };
+    Time d{ 1,1 };
+    Time e{ 1 };
+    int w;
+
+    //Date::MyClass vasia;
+    //vasia.e = 89;
+
+}
 
 class Integer {
 public:
@@ -132,5 +157,15 @@ int main()
 
     //DoSomething(a);
     //DoSomething(current);
+    current.SetDay(22);
+    current.SetMonth(2);
+    std::cout << '\n' << current.GetData();
 
+    Time time{ 1,15,10,600 };
+    std::cout << '\n' << time.GetData();
+    time.AddSeconds(72000);
+    std::cout << '\n' << time.GetData();
+    current.Add(time);
+
+    std::cout << '\n' << current.GetData();
 }

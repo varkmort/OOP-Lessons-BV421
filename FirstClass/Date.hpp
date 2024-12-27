@@ -3,17 +3,20 @@
 #ifndef DATE_HPP
 #define DATE_HPP
 
+#include <iostream>
+
+#include "Time.hpp"
+
 class Date {
 public:
+
     Date() :Date(1, 1, 1) {}
 
     //Date() = default;
     //Инктрукция компилятору принудиткльно создать конструктор по умолчанию
-
     //Date() = delete;
     //Инктрукция компилятору принудительно игнорировать создание
     //конструктора по умолчанию
-
     //конструктор класса определяет правила создания объекта
     //он настолько необходим объектам класса что при его отсутствии в программе
     //компилятор предоставляет конструктор по умолчанию сам
@@ -35,7 +38,7 @@ public:
     }
 
     void SetDay(int day) {
-        if (1< day)
+        if (1 > day)
         {
             std::cerr << "numeric value of day are lower than minimum " << 
                 day << '\n';
@@ -84,7 +87,55 @@ public:
         return 0 == year_%4 && (0 != year_ % 100 || 0 == year_ % 400);
     }
 
-    void Add(Time time);
+    void Add(Time time) {
+        //day_ += time.GetDays();
+        for (size_t i = time.GetDays(); i > 0; i--)
+        {
+            IncreaseDay();
+        }
+
+    }
+
+    void IncreaseDay(){
+        if (DaysInCurrentMonths() == day_) {
+            IncreaseMonth();
+            day_ = 1;
+        }
+        else {
+            day_ += 1;
+        }
+    }
+    void IncreaseMonth() {
+        if (12==month_)
+        {
+            IncreaseYear();
+            month_ = 1;
+        }
+        else {
+            month_ += 1;
+        }
+    }
+    void IncreaseYear(){
+        year_ += 1;
+    }
+
+    int DaysInCurrentMonths()const {
+        switch (month_)
+        {
+        case 1: return 31;
+        case 2: return 28 + IsLeap();
+        case 3: return 31;
+        case 4: return 30;
+        case 5: return 31;
+        case 6: return 30;
+        case 7: return 31;
+        case 8: return 31;
+        case 9: return 30;
+        case 10: return 31;
+        case 11: return 30;
+        case 12: return 31;
+        }
+    }
 
     int GetYear() const {
         return year_;
