@@ -89,6 +89,7 @@ public:
         std::cout << this << " Body object default construct\n";
     }
 
+
     //конструктор копирования
     Body(const Body &other) {
         heart = new Part;
@@ -114,15 +115,48 @@ public:
         return *this;
     }
 
+    //конструктор переноса и присваивание переносом
+    Body(Body &&other) {
+        heart = other.heart;
+        stomach= other.stomach;
+        liver= other.stomach;
+        brain= other.brain;
+        other.heart = nullptr;
+        other.stomach = nullptr;
+        other.stomach = nullptr;
+        other.brain = nullptr;
+        std::cout << this << " Body object move construct\n";
+    }
+
+    Body operator=(Body &&other) {
+        std::swap(heart, other.heart);
+        std::swap(stomach, other.stomach);
+        std::swap(liver, other.stomach);
+        std::swap(brain, other.brain);
+        return *this;
+    }
+
 
     //дкструктор класса по умолчанию.
     //создаётся как метод начинающийся с символа ~ соеденнного с именем класса
     //деструктор у класса может быть только один и никогда не имеет аргументов
     ~Body() {
-        delete heart;
-        delete stomach;
-        delete liver;
-        delete brain;
+        if (heart) 
+        {//проверка такая же по эффекту как в следующем условии
+            delete heart;
+        }
+        if (stomach!=nullptr) 
+        {//единственный минус такой записи - долше работает но не на много
+            delete stomach;
+        }
+        if(liver)
+        {
+            delete liver;
+        }
+        if(brain)
+        {
+            delete brain;
+        }
         std::cout << this << " Body object default destruct\n";
     }
 
@@ -142,23 +176,34 @@ void F00(Body obj) {
 }
 
 
+Body GenerateRandom() {
+    Body result;
+    result.brain->name += std::to_string(::rand() % 10);
+    return Body(std::move(result));
+}
+
 int main() {
-    Body a;
-    std::cout << &a << '\n';
-    a.brain->name = "BRAINZ";
-    Body *p = new Body;
-    Body b;
-    {
-        delete p;
-        Body c;
-        F00(b);
-    }
-    Body d;
-    d.Print();
-    b = d = a;
-    d.Print();
-    int r,e,y,i;
-    i = 9;
-    r = e = y = i + 1;
+    //Body a;
+    //std::cout << &a << '\n';
+    //a.brain->name = "BRAINZ";
+    //Body *p = new Body;
+    //Body b;
+    //{
+    //    delete p;
+    //    Body c;
+    //    F00(b);
+    //}
+    //Body d;
+    //d.Print();
+    //b = d = a;
+    //d.Print();
+    //int r,e,y,i;
+    //i = 9;
+    //r = e = y = i + 1;
+
+    Body programmDummy;
+
+    programmDummy = GenerateRandom();
+
     return 0;
 }
