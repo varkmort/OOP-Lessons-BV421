@@ -14,6 +14,11 @@
 
 #include <iostream>
 
+#define G_VAR 3
+
+#define name(type, name) type name;
+
+
 class Part {
 public:
     // методы помеченые как default будут предоставлены компилятором если 
@@ -160,4 +165,6 @@ int main()
     std::cout << Plant::Category::Tree;
     auto cat = Plant::Category::Tree;
     F00(cat);
+
+    
 }
