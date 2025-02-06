@@ -45,11 +45,11 @@ static void F00(){}
 
 class Singleton {
 public:
-    void WorkLoad();
-    static Singleton &GetInstance() {
-        static Singleton instance;
-        return instance;
-    }
+    void WorkLoad(){}
+    //static Singleton &GetInstance() {
+    //    static Singleton instance;
+    //    return instance;
+    //}
 
     static Singleton *getInstance() {
         if (!instance_) {
@@ -57,9 +57,10 @@ public:
         }
         return instance_;
     }
+
 protected:
-    Singleton();//конструкторы все какие нужны должны быть тут
-    Singleton(int);
+    Singleton() = default;//конструкторы все какие нужны должны быть тут
+    //Singleton(int);
     Singleton(const Singleton &other) = delete;
     Singleton &operator=(const Singleton &other) = delete;
 
@@ -129,12 +130,14 @@ void Print(Apple *obj) {
     }
 }
 
+void F01(Singleton obj){}
+
 int main()
 {
-    std::cout << "Current apple: " << Apple::Count() << '\n';
+   /* std::cout << "Current apple: " << Apple::Count() << '\n';
     Apple obj;
     std::cout << obj << '\n';
-    std::cout << "Current apple: " << Apple::Count() << '\n';
+    std::cout << "Current apple: " << obj.Count() << '\n';
     Apple *pObj = nullptr;
     std::cout << "Current apple: " << Apple::Count() << '\n';
     pObj = new Apple{"pink", 35.2};
@@ -146,8 +149,11 @@ int main()
     std::cout << "Current apple: " << Apple::Count() << '\n';
     Print(arr);
     delete pObj;
-    std::cout << "Current apple: " << Apple::Count() << '\n';
+    std::cout << "Current apple: " << Apple::Count() << '\n';*/
 
     Singleton &ref = *(Singleton::getInstance());
     ref.WorkLoad();
-}
+
+    //Singleton obj(ref);
+    //F01(obj);
+}   
