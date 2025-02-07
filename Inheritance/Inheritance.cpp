@@ -21,6 +21,10 @@
 class Base
 {
 public:
+    Base() {
+        std::cout << "Base default construct\n";
+    }
+
     void Hello() {
         std::cout << "Hello\n";
     }
@@ -41,6 +45,10 @@ private:
 class Derived:public Base
 {
 public:
+    Derived() {
+        std::cout << "Derived default construct\n";
+    }
+
     void Goodbuy() {
         std::cout << "Goodbuy\n";
     }
@@ -83,6 +91,13 @@ public:
         age_(age)
     {}
 
+
+    // ключевое слово virtual позволяет перегружать метод в наследниках
+    // так чтобы он мог вызываться полиморфно
+    virtual void MakeSound() const{
+        std::cout << "noize\n";
+    }
+
     void MeetBirthDay() {
         age_ += 1;
     }
@@ -106,15 +121,36 @@ class Duck:public Animal
 public:
     Duck() :Animal("Duck",1) {}
 
-    Duck(std::string name, int age = 0):Animal(name,age){}
+    Duck(int age):Animal("Duck",age){}
 
     //std::string GetName()const {
     //    return "Duck";
     //}
-    void MakeSound() const{
-        std::cout << "Quack!!!";
+    void MakeSound() const override
+    {
+        std::cout << "Quack!!!\n";
     }
 };
+
+
+void F01(const Animal *obj)
+{
+    std::cout << obj << '\n';
+    //obj->MeetBirthDay();
+    obj->MakeSound();
+}
+
+void F02(const Animal &obj)
+{
+    std::cout << &obj << '\n';
+    obj.MakeSound();
+}
+
+void F03(const Animal obj)
+{
+    std::cout << &obj << '\n';
+    obj.MakeSound();
+}
 
 int main()
 {
@@ -127,8 +163,20 @@ int main()
     derived.LoudThinking();
 
     Animal dog("Barky");
+    dog.MakeSound();
+    F01(&dog);
+    F02(dog);
+    F03(dog);
+
     Animal cat{ "Fluffy",1 };
+
+    F01(&cat);
+
     Duck duck;
     std::cout << duck.GetName() <<' ';
     duck.MakeSound();
+    duck.Animal::MakeSound();
+    F01(&duck);
+    F02(duck);
+    F03(duck);
 }

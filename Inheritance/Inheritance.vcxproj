@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Harvest.cpp" />
     <ClCompile Include="Inheritance.cpp" />
+    <ClCompile Include="plant.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Harvest.hpp" />
+    <ClInclude Include="Plant.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
