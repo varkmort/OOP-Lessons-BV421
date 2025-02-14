@@ -79,14 +79,14 @@ public:
 //
 
 
-class Animal {
+class AAnimal {
 public:
-    Animal() 
+    AAnimal() 
     { 
         name_ = "beast"; 
         age_ = 0; 
     }
-    Animal(std::string name,int age=0)
+    AAnimal(std::string name,int age=0)
         :name_(name),
         age_(age)
     {}
@@ -116,12 +116,12 @@ private:
 };
 
 
-class Duck:public Animal
+class Duck:public AAnimal
 {
 public:
-    Duck() :Animal("Duck",1) {}
+    Duck() :AAnimal("Duck",1) {}
 
-    Duck(int age):Animal("Duck",age){}
+    Duck(int age):AAnimal("Duck",age){}
 
     //std::string GetName()const {
     //    return "Duck";
@@ -133,20 +133,20 @@ public:
 };
 
 
-void F01(const Animal *obj)
+void F01(const AAnimal *obj)
 {
     std::cout << obj << '\n';
     //obj->MeetBirthDay();
     obj->MakeSound();
 }
 
-void F02(const Animal &obj)
+void F02(const AAnimal &obj)
 {
     std::cout << &obj << '\n';
     obj.MakeSound();
 }
 
-void F03(const Animal obj)
+void F03(const AAnimal obj)
 {
     std::cout << &obj << '\n';
     obj.MakeSound();
@@ -279,20 +279,20 @@ int main()
     derived.PublicSpeach();
     derived.LoudThinking();
 
-    Animal dog("Barky");
+    AAnimal dog("Barky");
     dog.MakeSound();
     F01(&dog);
     F02(dog);
     F03(dog);
 
-    Animal cat{ "Fluffy",1 };
+    AAnimal cat{ "Fluffy",1 };
 
     F01(&cat);
 
     Duck duck;
     std::cout << duck.GetName() <<' ';
     duck.MakeSound();
-    duck.Animal::MakeSound();
+    duck.AAnimal::MakeSound();
     F01(&duck);
     F02(duck);
     F03(duck);
