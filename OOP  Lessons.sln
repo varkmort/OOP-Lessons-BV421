@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiInheritance", "MultiIn
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConcurentInheritance", "ConcurentInheritance\ConcurentInheritance.vcxproj", "{8685B1E1-8C94-43FB-950F-054D3C9EFC59}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TemplateClasses", "TemplateClasses\TemplateClasses.vcxproj", "{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{8685B1E1-8C94-43FB-950F-054D3C9EFC59}.Release|x64.Build.0 = Release|x64
 		{8685B1E1-8C94-43FB-950F-054D3C9EFC59}.Release|x86.ActiveCfg = Release|Win32
 		{8685B1E1-8C94-43FB-950F-054D3C9EFC59}.Release|x86.Build.0 = Release|Win32
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Debug|x64.ActiveCfg = Debug|x64
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Debug|x64.Build.0 = Debug|x64
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Debug|x86.ActiveCfg = Debug|Win32
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Debug|x86.Build.0 = Debug|Win32
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x64.ActiveCfg = Release|x64
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x64.Build.0 = Release|x64
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x86.ActiveCfg = Release|Win32
+		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
