@@ -180,17 +180,19 @@ private:
 
 class Test {
 public:
-	Test():value(0){
+	Test():value(0)
+	{
 		std::cout << "test " << this << " default construct\n";
 	}
 
 	Test(int val) :value(val) {
+		value = val;
 		std::cout << "test " << this << " param construct\n";
 	}
 
-	Test(const Test&obj) :value(obj.value) {
-		std::cout << "test " << this << " copy construct\n";
-	}
+		Test(const Test&obj) :value(obj.value) {
+			std::cout << "test " << this << " copy construct\n";
+		}
 
 	~Test(){
 		std::cout << "test " << this << " default destruct\n";
@@ -203,7 +205,7 @@ void F00(smart_ptr<void> ptr) {
 
 }
 
-int main()
+int Example2()
 {
     //t_time<unsigned short> var;
 	smart_ptr<Test> s_ptr{Test(5)};
@@ -226,3 +228,24 @@ int main()
 	delete p_void;
 	return 0;
 }
+
+
+
+//	Шаблоны структур данных
+//		типы структур данных(коллекций):
+//			линейные массивы				+ array vector
+//			списки
+//				однонаправленные списки		+ forward_list
+//				двунаправленные списки		+ list
+//				кольцевые списки
+//			деревья
+//				бинарные деревья			+ set map и производные
+//				красно-чёрные деревья
+//				деревья отрезков		   +- deque
+//			графы 
+// 
+//		по поведению:
+//			очереди
+//				FIFO +		queue
+//				FILO +		stack
+//

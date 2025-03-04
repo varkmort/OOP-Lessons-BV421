@@ -94,11 +94,23 @@ public:
 
     friend void DoSomething(const Integer &a);
 
+    friend std::ostream &operator<<(std::ostream &out, const Integer &obj) {
+        out << obj.units_;
+    }
+
+    friend std::istream &operator>>(std::istream &inS,  Integer &obj) {
+        inS >> obj.units_;
+        std::string tmp;
+        std::getline(inS, tmp);
+    }
 
 private:
     bool sign_;
     unsigned units_;
 };
+
+
+
 
 //независисмо от того какой оператор вы перегружаете и как 
 //следует соблюдать правила:

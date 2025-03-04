@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConcurentInheritance", "Con
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TemplateClasses", "TemplateClasses\TemplateClasses.vcxproj", "{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adjustments in template", "Adjustments in template\Adjustments in template.vcxproj", "{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x64.Build.0 = Release|x64
 		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x86.ActiveCfg = Release|Win32
 		{E5E2FA97-AEB6-471C-9C09-F7588A4198FA}.Release|x86.Build.0 = Release|Win32
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Debug|x64.ActiveCfg = Debug|x64
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Debug|x64.Build.0 = Debug|x64
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Debug|x86.ActiveCfg = Debug|Win32
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Debug|x86.Build.0 = Debug|Win32
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x64.ActiveCfg = Release|x64
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x64.Build.0 = Release|x64
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x86.ActiveCfg = Release|Win32
+		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
