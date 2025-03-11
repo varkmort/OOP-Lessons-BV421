@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TemplateClasses", "Template
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adjustments in template", "Adjustments in template\Adjustments in template.vcxproj", "{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Serialization", "Serialization\Serialization.vcxproj", "{F0092E09-0170-44FD-9CDC-6C555CEE59E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +113,14 @@ Global
 		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x64.Build.0 = Release|x64
 		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x86.ActiveCfg = Release|Win32
 		{5035DC33-BEE8-46FB-B7BB-66E123B1E6C2}.Release|x86.Build.0 = Release|Win32
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Debug|x64.ActiveCfg = Debug|x64
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Debug|x64.Build.0 = Debug|x64
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Debug|x86.ActiveCfg = Debug|Win32
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Debug|x86.Build.0 = Debug|Win32
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Release|x64.ActiveCfg = Release|x64
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Release|x64.Build.0 = Release|x64
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Release|x86.ActiveCfg = Release|Win32
+		{F0092E09-0170-44FD-9CDC-6C555CEE59E3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
