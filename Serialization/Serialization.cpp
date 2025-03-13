@@ -41,11 +41,14 @@ int main()
             std::getline(inputF, tmp, '\n');
         }
         while (!inputF.eof()) {
-            CarOwner tmp;
+           
             std::string line;
             std::getline(inputF, line, '\n');
-            std::stringstream line_data(line);
-            if () {
+
+            if (line.size()) {
+                std::stringstream line_data(line);
+                
+                CarOwner tmp;
                 std::string raw_data;
                 std::getline(line_data, raw_data, ';');
                 tmp.name = raw_data;
@@ -55,10 +58,11 @@ int main()
                 tmp.count_of_cars = std::stoi(raw_data);
 
                 records.emplace_back(tmp);
-            }
-            //records.push_back(tmp);
 
-            //std::getline(inputF, raw_data, '\n');
+                //records.push_back(tmp);
+
+                //std::getline(inputF, raw_data, '\n');
+            }
         }
     }
     inputF.close();
@@ -66,20 +70,26 @@ int main()
     {
         std::cout << i << '\n';
     }
-    records.erase(records.begin() + 1);
-    //records.clear();
-    for (auto& i : records)
+
+    for (size_t i = 0; i < records.size(); i++)
     {
-        std::cout << i << '\n';
+        std::cout << records[i].name << '\n';
     }
-    //=============================
-    std::ofstream outputF("table.csv");
-    if (outputF.is_open()) {
-        outputF << "name;age;count_of_cars;\n";
-        for (auto& i : records)
-        {
-            outputF << i.name << ';' << i.age << 
-                ';' << i.count_of_cars << ";\n";
-        }
-    }
+
+    //records.erase(records.begin() + 1);
+    ////records.clear();
+    //for (auto& i : records)
+    //{
+    //    std::cout << i << '\n';
+    //}
+    ////=============================
+    //std::ofstream outputF("table.csv");
+    //if (outputF.is_open()) {
+    //    outputF << "name;age;count_of_cars;\n";
+    //    for (auto& i : records)
+    //    {
+    //        outputF << i.name << ';' << i.age << 
+    //            ';' << i.count_of_cars << ";\n";
+    //    }
+    //}
 }
