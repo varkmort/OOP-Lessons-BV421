@@ -17,6 +17,19 @@
 
 #include <vector>
 #include <string>
+#include <list>
+#include <deque>
+#include <set>
+#include <unordered_set>
+#include <map>
+#include <unordered_map>
+//#include <queue>
+//#include <stack>
+
+#include <algorithm>
+#include <chrono>
+#include <type_traits>
+
 
 struct CarOwner {
     std::string name;
@@ -29,7 +42,7 @@ std::ostream& operator<<(std::ostream& out, const CarOwner& obj) {
         ", cars in ownership: " << obj.count_of_cars;
 }
 
-int main()
+int main2()
 {
     //read from csv
     std::vector<CarOwner> records;
@@ -92,4 +105,72 @@ int main()
     //            ';' << i.count_of_cars << ";\n";
     //    }
     //}
+
+    return 0;
+}
+
+
+class Record {
+public:
+    Record() :Record("",'Ж',0) {}
+    Record(std::string name, char sex, int count)
+        :name_(name),
+        sex_(sex),
+        count_(count)
+    {}
+
+
+    friend std::ostream& operator<<(std::ostream& out, const Record& obj) {
+        return out << obj.name_ << ';' << obj.sex_ << ';' << obj.count_ << ';';
+    }
+    
+    std::string GetName()const { return name_; }
+    char GetSex()const { return sex_; }
+    int GetCount()const { return count_; };
+
+    void SetName(std::string name) { name_ = name; }
+    void SetSex(char sex) { sex_ = sex; }
+    void SetCount(int count) { count_ = count; }
+private:
+    std::string name_;
+    char sex_;
+    int count_;
+};
+
+int main() {
+    ::setlocale(LC_ALL, "rus");
+    std::vector<Record> records;
+
+    std::ifstream inF("russian_names.csv");
+    if (inF.is_open()) {
+        {
+            std::string tmp;
+            std::getline(inF, tmp, '\n');
+        }
+        while (!inF.eof()) {
+            std::string line;
+            std::getline(inF, line, '\n');
+            if (line.size()) {
+                std::stringstream line_stream(line);
+                std::string raw;
+                Record tmp;
+
+                std::getline(line_stream, raw, ';');
+                std::getline(line_stream, raw, ';');
+                tmp.SetName(raw);
+                std::getline(line_stream, raw, ';');
+                tmp.SetSex(raw[0]);
+                std::getline(line_stream, raw, ';');
+                tmp.SetCount(std::stoi(raw));
+                records.push_back(tmp);
+            }
+            if (records.size() == 10) { break; }
+        }
+    }
+    for (auto& record : records)
+    {
+        std::cout << record << '\n';
+    }
+
+    return 0;
 }
