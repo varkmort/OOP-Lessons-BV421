@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <chrono>
 #include <type_traits>
+#include <typeinfo>
 
 
 struct CarOwner {
@@ -131,11 +132,21 @@ public:
     void SetName(std::string name) { name_ = name; }
     void SetSex(char sex) { sex_ = sex; }
     void SetCount(int count) { count_ = count; }
+
+
 private:
     std::string name_;
     char sex_;
     int count_;
 };
+
+bool OurMeasuring(const Record lsv, const Record rsv) {
+    return lsv.GetCount() < rsv.GetCount();
+}
+
+auto func = [](const Record& lsv, const Record& rsv)->bool {
+    return lsv.GetCount() > rsv.GetCount();
+    };
 
 int main() {
     ::setlocale(LC_ALL, "rus");
@@ -155,22 +166,46 @@ int main() {
                 std::string raw;
                 Record tmp;
 
-                std::getline(line_stream, raw, ';');
-                std::getline(line_stream, raw, ';');
-                tmp.SetName(raw);
-                std::getline(line_stream, raw, ';');
-                tmp.SetSex(raw[0]);
-                std::getline(line_stream, raw, ';');
-                tmp.SetCount(std::stoi(raw));
-                records.push_back(tmp);
+                std::getline(line_stream, raw, ';');//пропуск первого блока
+                std::getline(line_stream, raw, ';');//считываем имя
+                tmp.SetName(raw);//записываем имя в временный объект
+                std::getline(line_stream, raw, ';');//считали пол
+                tmp.SetSex(raw[0]);//записали в объект с конвертацией из строки в символ
+                std::getline(line_stream, raw, ';');//считали цисло носителей
+                tmp.SetCount(std::stoi(raw));//конвертация данных в число и запись в объект
+                records.push_back(tmp);//добавили запись в вектор
             }
-            if (records.size() == 10) { break; }
+            if (records.size() == 20) { break; }
         }
     }
     for (auto& record : records)
     {
         std::cout << record << '\n';
     }
+    auto res = std::max_element(records.begin(), records.end(), OurMeasuring);
+    
+    std::cout<<'\n' << *res;
+
+    auto res2 = std::min_element(
+                                    records.begin(), 
+                                    records.end(),
+                                    [](const Record& lsv, const Record& rsv)->bool {
+                                        return lsv.GetCount() > rsv.GetCount();
+                                    }
+                                );
+    /*
+    std::min_element(){
+    ...
+    Pred(val1,val2);
+    }    
+    */
+    std::cout << '\n' << *res2;
+
+    auto reult = [](const Record& lsv, const Record& rsv)->bool {
+        return lsv.GetCount() > rsv.GetCount();
+        }(records[0],records[1]);
+
+    std::cout << typeid(func).name() << '\n';
 
     return 0;
 }
