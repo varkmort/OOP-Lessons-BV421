@@ -45,6 +45,11 @@ std::ostream& operator<<(std::ostream& out, const CarOwner& obj) {
 
 int main2()
 {
+    // создание временной точки через полное имя переменной и высокоточные часы
+    std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+    auto finish = std::chrono::system_clock::now();
+
+
     //read from csv
     std::vector<CarOwner> records;
     std::ifstream inputF("table.csv");//создали поток для забора данных
@@ -54,6 +59,7 @@ int main2()
             std::string tmp;
             std::getline(inputF, tmp, '\n');
         }
+        start = std::chrono::system_clock::now();
         while (!inputF.eof()) {
            
             std::string line;
@@ -78,6 +84,7 @@ int main2()
                 //std::getline(inputF, raw_data, '\n');
             }
         }
+        finish = std::chrono::system_clock::now();
     }
     inputF.close();
     for (auto& i : records)
@@ -85,10 +92,17 @@ int main2()
         std::cout << i << '\n';
     }
 
-    for (size_t i = 0; i < records.size(); i++)
-    {
-        std::cout << records[i].name << '\n';
-    }
+    std::chrono::duration<double, std::milli> elapsed = finish - start;
+    auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
+
+    std::cout << "\n\nRead takes " << elapsed.count() << " seconds\n";
+    std::cout << "Read takes " << dur << " milliseconds\n";
+
+
+    //for (size_t i = 0; i < records.size(); i++)
+    //{
+    //    std::cout << records[i].name << '\n';
+    //}
 
     //records.erase(records.begin() + 1);
     ////records.clear();
@@ -201,11 +215,12 @@ int main() {
     */
     std::cout << '\n' << *res2;
 
-    auto reult = [](const Record& lsv, const Record& rsv)->bool {
-        return lsv.GetCount() > rsv.GetCount();
-        }(records[0],records[1]);
-
-    std::cout << typeid(func).name() << '\n';
+    // демонстрация сохранения результат вызова лямбда вункции в момент её создания
+    //auto reult = [](const Record& lsv, const Record& rsv)->bool {
+    //    return lsv.GetCount() > rsv.GetCount();
+    //    }(records[0],records[1]);
+    // вывод на экран названия типа данных переданной переменной
+    //std::cout << typeid(func).name() << '\n';
 
     return 0;
 }
