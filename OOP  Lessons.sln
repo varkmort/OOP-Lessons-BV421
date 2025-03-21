@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Serialization", "Serializat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Collections", "Collections\Collections.vcxproj", "{D0102C3C-7746-4FE9-82EC-67C3420B6D73}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LambdaFunktions", "LambdaFunktions\LambdaFunktions.vcxproj", "{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -131,6 +133,14 @@ Global
 		{D0102C3C-7746-4FE9-82EC-67C3420B6D73}.Release|x64.Build.0 = Release|x64
 		{D0102C3C-7746-4FE9-82EC-67C3420B6D73}.Release|x86.ActiveCfg = Release|Win32
 		{D0102C3C-7746-4FE9-82EC-67C3420B6D73}.Release|x86.Build.0 = Release|Win32
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Debug|x64.ActiveCfg = Debug|x64
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Debug|x64.Build.0 = Debug|x64
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Debug|x86.Build.0 = Debug|Win32
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Release|x64.ActiveCfg = Release|x64
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Release|x64.Build.0 = Release|x64
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Release|x86.ActiveCfg = Release|Win32
+		{5A3F3113-D5B3-4F99-8B2F-6505C6CD2AFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
