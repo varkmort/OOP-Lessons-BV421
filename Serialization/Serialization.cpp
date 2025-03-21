@@ -45,9 +45,7 @@ std::ostream& operator<<(std::ostream& out, const CarOwner& obj) {
 
 int main2()
 {
-    // создание временной точки через полное имя переменной и высокоточные часы
-    std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
-    auto finish = std::chrono::system_clock::now();
+   
 
 
     //read from csv
@@ -59,7 +57,7 @@ int main2()
             std::string tmp;
             std::getline(inputF, tmp, '\n');
         }
-        start = std::chrono::system_clock::now();
+       
         while (!inputF.eof()) {
            
             std::string line;
@@ -84,7 +82,6 @@ int main2()
                 //std::getline(inputF, raw_data, '\n');
             }
         }
-        finish = std::chrono::system_clock::now();
     }
     inputF.close();
     for (auto& i : records)
@@ -92,11 +89,7 @@ int main2()
         std::cout << i << '\n';
     }
 
-    std::chrono::duration<double, std::milli> elapsed = finish - start;
-    auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
-
-    std::cout << "\n\nRead takes " << elapsed.count() << " seconds\n";
-    std::cout << "Read takes " << dur << " milliseconds\n";
+  
 
 
     //for (size_t i = 0; i < records.size(); i++)
@@ -147,6 +140,9 @@ public:
     void SetSex(char sex) { sex_ = sex; }
     void SetCount(int count) { count_ = count; }
 
+    bool operator < (const Record& other) const {
+        return this->name_ < other.name_;
+    }
 
 private:
     std::string name_;
@@ -163,8 +159,13 @@ auto func = [](const Record& lsv, const Record& rsv)->bool {
     };
 
 int main() {
+
+    // создание временной точки через полное имя переменной и высокоточные часы
+    std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+   
+
     ::setlocale(LC_ALL, "rus");
-    std::vector<Record> records;
+    std::deque<Record> records;
 
     std::ifstream inF("russian_names.csv");
     if (inF.is_open()) {
@@ -175,6 +176,8 @@ int main() {
         while (!inF.eof()) {
             std::string line;
             std::getline(inF, line, '\n');
+            //start = std::chrono::system_clock::now();
+
             if (line.size()) {
                 std::stringstream line_stream(line);
                 std::string raw;
@@ -189,31 +192,109 @@ int main() {
                 tmp.SetCount(std::stoi(raw));//конвертация данных в число и запись в объект
                 records.push_back(tmp);//добавили запись в вектор
             }
-            if (records.size() == 20) { break; }
+            //if (records.size() == 20) { break; }
         }
+        //finish = std::chrono::system_clock::now();
     }
-    for (auto& record : records)
-    {
-        std::cout << record << '\n';
-    }
+    auto finish = std::chrono::system_clock::now();
+    //for (auto& record : records)
+    //{
+    //    std::cout << record << '\n';
+    //}
+
+    std::chrono::duration<double, std::milli> elapsed = finish - start;
+    
+    auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count();
+
+    std::cout << "\n\nRead takes " << elapsed.count() << " milliseconds\n";
+    std::cout << "Read takes " << dur << " nanoseconds\n";
+
+
+    auto start2 = std::chrono::system_clock::now();
+
     auto res = std::max_element(records.begin(), records.end(), OurMeasuring);
     
-    std::cout<<'\n' << *res;
+    auto finish2 = std::chrono::system_clock::now();
 
-    auto res2 = std::min_element(
-                                    records.begin(), 
-                                    records.end(),
-                                    [](const Record& lsv, const Record& rsv)->bool {
-                                        return lsv.GetCount() > rsv.GetCount();
-                                    }
-                                );
-    /*
-    std::min_element(){
-    ...
-    Pred(val1,val2);
-    }    
-    */
-    std::cout << '\n' << *res2;
+    std::cout<<'\n' << *res << '\n';
+    dur = std::chrono::duration_cast<std::chrono::milliseconds>(finish2 - start2).count();
+    
+    std::cout << "Max value find takes " << dur  << " milliseconds\n";
+    
+    std::string searching_name = "Эммерих";
+
+
+    auto start3 = std::chrono::system_clock::now();
+
+    auto search = std::find_if(records.begin(), records.end(), 
+        [searching_name](const Record& obj)->bool {
+            //searching_name = "";
+            return obj.GetName() == searching_name;
+        }
+        );
+
+    auto finish3 = std::chrono::system_clock::now();
+    dur = std::chrono::duration_cast<std::chrono::milliseconds>(finish3 - start3).count();
+    if(search != records.end())
+    {
+        std::cout << searching_name << " was find " << *search <<
+            " in " << dur << " milliseconds.\n\n\n";
+    }
+
+    int count{};
+    auto start4 = std::chrono::system_clock::now();
+    for (const auto& record : records)
+    {
+        if (search->GetSex() == record.GetSex() && search->GetCount() < record.GetCount()) {
+            count += 1;
+        }
+    }
+    auto finish4 = std::chrono::system_clock::now();
+    dur = std::chrono::duration_cast<std::chrono::milliseconds>(finish4 - start4).count();
+
+    std::cout << searching_name << " has  " << count <<
+        " names with bigger amount of owners " << dur << " millisecondsof counting.\n\n\n";
+
+
+    auto start5 = std::chrono::system_clock::now();
+
+    auto delete_mark = std::find_if(records.begin(), records.end(),
+        [](const Record& obj)->bool {
+            //searching_name = "";
+            return obj.GetCount() == 0;
+        }
+    );
+
+    while (delete_mark != records.end()) {
+        records.erase(delete_mark);
+        delete_mark = std::find_if(records.begin(), records.end(),
+            [](const Record& obj)->bool {
+                //searching_name = "";
+                return obj.GetCount() == 0;
+            }
+        );
+    }
+
+
+    auto finish5 = std::chrono::system_clock::now();
+    dur = std::chrono::duration_cast<std::chrono::milliseconds>(finish5 - start5).count();
+
+    std::cout << "\n\ncollection cleared " << dur << " during milliseconds \n";
+
+    //auto res2 = std::min_element(
+    //                                records.begin(), 
+    //                                records.end(),
+    //                                [](const Record& lsv, const Record& rsv)->bool {
+    //                                    return lsv.GetCount() > rsv.GetCount();
+    //                                }
+    //                            );
+    ///*
+    //std::min_element(){
+    //...
+    //Pred(val1,val2);
+    //}    
+    //*/
+    //std::cout << '\n' << *res2;
 
     // демонстрация сохранения результат вызова лямбда вункции в момент её создания
     //auto reult = [](const Record& lsv, const Record& rsv)->bool {
